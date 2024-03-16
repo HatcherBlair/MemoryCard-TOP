@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GameBoard } from "./gameBoard";
 import { GameOver } from "./gameOver";
+import { Scoreboard } from "./scoreboard";
 import "../styles/game.css";
 
 // Game is responsible for managing the cards on the screen and getting data from pokeAPI
@@ -30,6 +31,7 @@ export function Game() {
   // If there is a way to do this without nesting ternaries LMK
   return (
     <div className="game-container">
+      <Scoreboard score={score} highScore={highScore} />
       {gameOver ? (
         <GameOver score={score} playAgain={playAgain} />
       ) : (

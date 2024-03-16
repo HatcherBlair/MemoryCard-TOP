@@ -29,7 +29,7 @@ export function Game() {
   // Yuck nested ternaries!
   // If there is a way to do this without nesting ternaries LMK
   return (
-    <div className="gameBoard">
+    <div className="game-container">
       {gameOver ? (
         <GameOver score={score} playAgain={playAgain} />
       ) : (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { PokeCard } from "./pokeCard";
+import "../styles/gameBoard.css";
 
 const BASEURL = "https://pokeapi.co/api/v2/";
 

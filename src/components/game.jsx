@@ -12,11 +12,18 @@ export function Game() {
 
   function increaseScore() {
     setScore(score + 1);
+
+    // Player has clicked all cards
+    if (score + 1 >= 20) isOver(score + 1);
   }
 
   // Game over
-  function isOver() {
-    if (score > highScore) setHighScore(score);
+  function isOver(optScore = null) {
+    if (optScore) {
+      setHighScore(optScore);
+    } else {
+      if (score > highScore) setHighScore(score);
+    }
     setGameOver(true);
   }
 

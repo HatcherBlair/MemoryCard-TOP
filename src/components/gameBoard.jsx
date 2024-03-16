@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { PokeCard } from "./pokeCard";
 import "../styles/gameBoard.css";
@@ -18,7 +19,6 @@ export function GameBoard({ gameOver, increaseScore }) {
 
       // a and b intentionally not used
       const shuffledData = data.pokemon_species.sort(
-        // eslint-disable-next-line no-unused-vars
         (_a, _b) => 0.5 - Math.random()
       );
 
@@ -38,6 +38,8 @@ export function GameBoard({ gameOver, increaseScore }) {
     } else {
       setClickedList(new Set([...clickedList, key]));
       increaseScore();
+      // Shuffle the list
+      setPokeList(pokeList.sort((_a, _b) => 0.5 - Math.random()));
     }
   }
 

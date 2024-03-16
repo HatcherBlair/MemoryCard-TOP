@@ -8,10 +8,10 @@ const BASEURL = "https://pokeapi.co/api/v2/";
 export function GameBoard({ gameOver, increaseScore }) {
   const [pokeList, setPokeList] = useState(null);
   const [clickedList, setClickedList] = useState(new Set());
+  const [generation, setGeneration] = useState("generation/1/");
 
   // Creates pokeList
   useEffect(() => {
-    const generation = "generation/1/";
     const getPokemon = async () => {
       const response = await fetch(`${BASEURL}${generation}`, { mode: "cors" });
       const data = await response.json();
@@ -27,7 +27,7 @@ export function GameBoard({ gameOver, increaseScore }) {
     };
 
     getPokemon();
-  }, []);
+  }, [generation]);
 
   // Matches key(pokemon name) with already clicked cards
   // If !cardClicked -> addToList
@@ -41,18 +41,44 @@ export function GameBoard({ gameOver, increaseScore }) {
     }
   }
 
+  function generationOnChange(e) {
+    setGeneration(e.target.value);
+  }
+
   return (
-    <div className="gameBoard">
-      {pokeList
-        ? pokeList.map((pokemon) => (
-            <PokeCard
-              key={pokemon.name}
-              name={pokemon.name}
-              BASEURL={BASEURL}
-              onClick={onCardClick}
-            />
-          ))
-        : "Loading..."}
+    <div>
+      <div className="generation-select">
+        <label>Pokemon Generation: </label>
+        <select
+          name="currGeneration"
+          defaultValue="generation/1/"
+          onChange={(e) => generationOnChange(e)}
+        >
+          <option value="generation/1/">Gen 1</option>
+          <option value="generation/2/">Gen 2</option>
+          <option value="generation/3/">Gen 3</option>
+          <option value="generation/4/">Gen 4</option>
+          <option value="generation/5/">Gen 5</option>
+          <option value="generation/6/">Gen 6</option>
+          <option value="generation/7/">Gen 7</option>
+          <option value="generation/8/">Gen 8</option>
+          <option value="generation/9/">Gen 9</option>
+        </select>
+      </div>
+
+      <div className="gameBoard">
+        {pokeList
+          ? pokeList.map((pokemon) => (
+              <PokeCard
+                key={pokemon.name}
+                name={pokemon.name}
+                url={pokemon.url}
+                BASEURL={BASEURL}
+                onClick={onCardClick}
+              />
+            ))
+          : "Loading..."}
+      </div>
     </div>
   );
 }
